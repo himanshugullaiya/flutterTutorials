@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/pages/homepage.dart';
+import 'package:flutter_catalog/utils/routes.dart';
+import 'package:flutter_catalog/widgets/themes.dart';
 import 'pages/homepage.dart';
 import 'pages/loginpage.dart';
 import 'package:google_fonts/google_fonts.dart'; // this is a plugin
@@ -14,21 +16,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: HomePage(),
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        // primaryTextTheme: GoogleFonts.latoTextTheme()), //only for primary
-        fontFamily: GoogleFonts.lato().fontFamily,
-      ),
-      // darkTheme: ThemeData(
-      //   brightness: Brightness.dark,
-      // ),
-      // initialRoute: "/home",
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
+      initialRoute: "/",
       routes: {
-        "/": (context) => LoginPage(), //default route
-        "/home": (context) => HomePage(),
-        "/login": (context) => LoginPage()
+        "/": (context) => LoginPage(),
+        MyRoutes.homeRoute: (context) =>
+            HomePage(), //default route  //static : took memory only once // we dont need to create objects
+        MyRoutes.loginRoute: (context) => LoginPage()
       },
     );
   }
